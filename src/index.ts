@@ -25,8 +25,8 @@ const nextSymbol = Symbol("next");
 const handlerContext: HandlerContext = {
 	next: () => {
 		throw nextSymbol;
-	}
-}
+	},
+};
 
 export function devApi(...handlers: (Handler | HandlerObject)[]): Plugin {
 	return {
