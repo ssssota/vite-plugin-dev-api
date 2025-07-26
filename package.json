@@ -1,7 +1,7 @@
 {
 	"name": "vite-plugin-dev-api",
 	"description": "A Vite plugin to provide a development API",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"type": "module",
 	"module": "dist/index.js",
 	"types": "dist/index.d.ts",
