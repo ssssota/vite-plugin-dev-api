@@ -2,13 +2,33 @@ import { createRequest, sendResponse } from "@remix-run/node-fetch-server";
 import type { Connect, Plugin } from "vite";
 
 type PromiseOr<T> = T | Promise<T>;
-type Handler = (request: Request, next: () => never) => PromiseOr<Response>;
-const nextSymbol = Symbol("next");
-const throwToNext = () => {
-	throw nextSymbol;
+export type HandlerContext = {
+	next: () => never;
 };
+export type Handler = (
+	request: Request,
+	context: HandlerContext,
+) => PromiseOr<Response>;
+/**
+ * HandlerObject allows customization of the handler behavior.
+ */
+export type HandlerObject = {
+	fetch: Handler;
+	/**
+	 * If true, the handler will call next() if the response status is 404.
+	 * This allows other handlers to process the request.
+	 * @default false
+	 */
+	nextIf404?: boolean;
+};
+const nextSymbol = Symbol("next");
+const handlerContext: HandlerContext = {
+	next: () => {
+		throw nextSymbol;
+	}
+}
 
-export function devApi(...handlers: Handler[]): Plugin {
+export function devApi(...handlers: (Handler | HandlerObject)[]): Plugin {
 	return {
 		name: "dev-api",
 		configureServer(server) {
@@ -20,15 +40,20 @@ export function devApi(...handlers: Handler[]): Plugin {
 	};
 }
 
-function createMiddleware(handler: Handler): Connect.NextHandleFunction {
+function createMiddleware(
+	handler: Handler | HandlerObject,
+): Connect.NextHandleFunction {
+	const handlerFn = "fetch" in handler ? handler.fetch : handler;
+	const nextIf404 = "nextIf404" in handler ? handler.nextIf404 : false;
 	return async (req, res, next) => {
 		const request = createRequest(req, res);
 		let response: Response | undefined;
 		try {
-			response = await handler(request, throwToNext);
+			response = await handlerFn(request, handlerContext);
 		} catch (error) {
 			if (error === nextSymbol) return next();
 		}
+		if (response?.status === 404 && nextIf404) return next();
 		return await sendResponse(res, response ?? internalServerError());
 	};
 }
