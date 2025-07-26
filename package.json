@@ -1,7 +1,7 @@
 {
 	"name": "vite-plugin-dev-api",
 	"description": "A Vite plugin to provide a development API",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"module": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -32,6 +32,10 @@
 		"typescript": "^5.8.3",
 		"vite": "^7.0.6",
 		"vitest": "^3.2.4"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ssssota/vite-plugin-dev-api.git"
 	},
 	"packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
 }
