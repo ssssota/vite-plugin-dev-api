@@ -18,6 +18,9 @@ importers:
       '@types/node':
         specifier: ^24.1.0
         version: 24.1.0
+      hono:
+        specifier: ^4.8.9
+        version: 4.8.9
       tsdown:
         specifier: ^0.13.0
         version: 0.13.0(@typescript/native-preview@7.0.0-dev.20250726.1)(typescript@5.8.3)
@@ -660,6 +663,10 @@ packages:
 
   get-tsconfig@4.10.1:
     resolution: {integrity: sha512-auHyJ4AgMz7vgS8Hp3N6HXSmlMdUyhSUrfBF16w153rxtLIEOE+HGqaBppczZvnHLqQJfiHotCYpNhl0lUROFQ==}
+
+  hono@4.8.9:
+    resolution: {integrity: sha512-ERIxkXMRhUxGV7nS/Af52+j2KL60B1eg+k6cPtgzrGughS+espS9KQ7QO0SMnevtmRlBfAcN0mf1jKtO6j/doA==}
+    engines: {node: '>=16.9.0'}
 
   hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
@@ -1371,6 +1378,8 @@ snapshots:
   get-tsconfig@4.10.1:
     dependencies:
       resolve-pkg-maps: 1.0.0
+
+  hono@4.8.9: {}
 
   hookable@5.5.3: {}
 
