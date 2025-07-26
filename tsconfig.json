@@ -1,6 +1,14 @@
 {
-	"references": [
-		{ "path": "./tsconfig.node.json" },
-		{ "path": "./tsconfig.lib.json" }
-	]
+	"compilerOptions": {
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"lib": ["esnext", "dom"],
+		"strict": true,
+		"verbatimModuleSyntax": true,
+		"skipLibCheck": true,
+		"noEmit": true,
+
+		"outDir": "dist",
+		"rootDir": "src"
+	}
 }

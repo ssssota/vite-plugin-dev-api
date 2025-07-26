@@ -63,42 +63,42 @@ it("should handle multiple handlers", async () => {
 });
 
 it("should handle multiple plugins", async () => {
-  const plugin1 = devApi(async (request, next) => {
-    if (request.url.endsWith("/plugin1")) {
-      return new Response("Plugin 1 response", { status: 200 });
-    }
-    return next();
-  });
+	const plugin1 = devApi(async (request, next) => {
+		if (request.url.endsWith("/plugin1")) {
+			return new Response("Plugin 1 response", { status: 200 });
+		}
+		return next();
+	});
 
-  const plugin2 = devApi(async (request, next) => {
-    if (request.url.endsWith("/plugin2")) {
-      return new Response("Plugin 2 response", { status: 200 });
-    }
-    return next();
-  });
+	const plugin2 = devApi(async (request, next) => {
+		if (request.url.endsWith("/plugin2")) {
+			return new Response("Plugin 2 response", { status: 200 });
+		}
+		return next();
+	});
 
-  await using _ = await startViteServer([plugin1, plugin2]);
+	await using _ = await startViteServer([plugin1, plugin2]);
 
-  const response1 = await fetch("http://localhost:3000/plugin1");
-  expect(response1.status).toBe(200);
-  expect(await response1.text()).toBe("Plugin 1 response");
+	const response1 = await fetch("http://localhost:3000/plugin1");
+	expect(response1.status).toBe(200);
+	expect(await response1.text()).toBe("Plugin 1 response");
 
-  const response2 = await fetch("http://localhost:3000/plugin2");
-  expect(response2.status).toBe(200);
-  expect(await response2.text()).toBe("Plugin 2 response");
+	const response2 = await fetch("http://localhost:3000/plugin2");
+	expect(response2.status).toBe(200);
+	expect(await response2.text()).toBe("Plugin 2 response");
 });
 
 it("should handle errors in handlers", async () => {
-  const plugin = devApi(async (request, next) => {
-    if (request.url.endsWith("/error")) {
-      throw new Error("Test error");
-    }
-    return next();
-  });
+	const plugin = devApi(async (request, next) => {
+		if (request.url.endsWith("/error")) {
+			throw new Error("Test error");
+		}
+		return next();
+	});
 
-  await using _ = await startViteServer([plugin]);
+	await using _ = await startViteServer([plugin]);
 
-  const response = await fetch("http://localhost:3000/error");
-  expect(response.status).toBe(500);
-  expect(await response.text()).toBe("Internal Server Error");
+	const response = await fetch("http://localhost:3000/error");
+	expect(response.status).toBe(500);
+	expect(await response.text()).toBe("Internal Server Error");
 });
