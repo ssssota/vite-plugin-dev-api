@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"composite": true,
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"lib": ["esnext", "dom"],
+		"strict": true,
+		"isolatedDeclarations": true,
+		"verbatimModuleSyntax": true,
+
+		"outDir": "dist",
+		"rootDir": "src"
+	},
+	"include": ["src/**/*.ts"]
+}

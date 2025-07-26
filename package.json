@@ -1,0 +1,37 @@
+{
+	"name": "vite-plugin-dev-api",
+	"description": "A Vite plugin to provide a development API",
+	"version": "0.0.1",
+	"type": "module",
+	"module": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"build": "tsdown",
+		"check": "biome check . && tsc",
+		"fmt": "biome check . --fix",
+		"test": "vitest"
+	},
+	"files": [
+		"dist"
+	],
+	"keywords": [
+		"vite",
+		"plugin",
+		"dev",
+		"api"
+	],
+	"author": "TOMIKAWA Sotaro",
+	"license": "MIT",
+	"dependencies": {
+		"@remix-run/node-fetch-server": "^0.8.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.1.2",
+		"@types/node": "^24.1.0",
+		"tsdown": "^0.13.0",
+		"typescript": "^5.8.3",
+		"vite": "^7.0.6",
+		"vitest": "^3.2.4"
+	},
+	"packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+}
